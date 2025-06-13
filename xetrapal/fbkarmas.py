@@ -11,6 +11,16 @@ import karma
 
 #Fire and Forget Astras, to be run with {'msg':'run','func':function_object,'args':(),'kwargs':{}}
 def fb_login(browser,fbconfig,logger=astra.baselogger):
+		"""
+		Logs into Facebook using the provided browser instance and credentials.
+
+		Args:
+			browser: Selenium WebDriver instance.
+			fbconfig (configparser.ConfigParser): ConfigParser object containing Facebook
+												  credentials under the "Facebook" section
+												  (fbusername, fbpassword).
+			logger (logging.Logger, optional): Logger instance. Defaults to astra.baselogger.
+		"""
 		fbusr=fbconfig.get("Facebook","fbusername")
 		fbpwd=fbconfig.get("Facebook","fbpassword")
 		# or you can use Chrome(executable_path="/usr/bin/chromedriver")
@@ -31,14 +41,39 @@ def fb_login(browser,fbconfig,logger=astra.baselogger):
 			logger.error("Could not log into FB.."+ repr(exception))
 
 def fb_search(fbbrowser,searchstring,logger=astra.baselogger):
+		"""
+		Performs a search on Facebook using the provided browser instance.
+
+		Args:
+			fbbrowser: Selenium WebDriver instance (should be logged into Facebook).
+			searchstring (str): The string to search for on Facebook.
+			logger (logging.Logger, optional): Logger instance. Defaults to astra.baselogger.
+		"""
 		logger.info("Searching FB for " + searchstring)
 		searchbar=fbbrowser.find_element_by_name("q")
 		searchbar.clear()
 		searchbar.send_keys(searchstring)
 		searchbar.send_keys(Keys.ENTER)
-		time.sleep(10)
+		time.sleep(10) # Consider using explicit waits instead of time.sleep
 
 def fb_get_postlinks_from_timeline(fbbrowser,url="https://facebook.com",count=10,logger=astra.baselogger):
+    """
+    Retrieves a specified number of post links from a Facebook timeline/page.
+
+    It navigates to the given URL, scrolls down to load posts, and extracts
+    the permalinks of the posts.
+
+    Args:
+        fbbrowser: Selenium WebDriver instance (should be logged into Facebook).
+        url (str, optional): The URL of the Facebook page/timeline to scrape.
+                             Defaults to "https://facebook.com".
+        count (int, optional): The desired number of post links to retrieve.
+                               Defaults to 10.
+        logger (logging.Logger, optional): Logger instance. Defaults to astra.baselogger.
+
+    Returns:
+        list: A list of unique post permalinks (strings), up to the specified count.
+    """
     fbbrowser.get(url)
     karma.wait()
     postlinks=[]

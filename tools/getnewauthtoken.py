@@ -1,6 +1,18 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
+Obtains Twitter authentication tokens using the Twython library.
+
+This script guides the user through the OAuth authentication process
+to get the necessary tokens for accessing the Twitter API. It then
+saves these tokens to a configuration file.
+"""
+
+# TODO(agent): Add imports for libraries like twython, appkey, appsecret, twconf.
+# Assuming 'twython' is the primary library.
+# import twython
+
+"""
 Created on Fri Mar 16 18:12:28 2018
 
 @author: anandabhairav

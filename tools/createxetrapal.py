@@ -1,13 +1,4 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug  6 12:21:15 2018
-
-@author: ananda
-"""
-
-'''
-Create a directory with the following structure
-
-
-'''
+#!/usr/bin/env python
+# TODO(rpoli): Create xetrapal if it does not exist.
+"""This script is intended to create xetrapal if it does not exist."""
+pass
